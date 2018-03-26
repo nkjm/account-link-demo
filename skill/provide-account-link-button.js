@@ -36,7 +36,7 @@ module.exports = (line_client, event) => {
                 type: "buttons",
                 text: "下記ボタンからXXXのアカウント連携をおこなってください",
                 actions: [
-                    {type:"uri", label:"連携", uri:"https://" + process.env.CP_HOSTNAME + "/account-link"}
+                    {type:"uri", label:"連携", uri:"https://" + process.env.CP_HOSTNAME + "/account-link?link_token=" + link_token}
                 ]
             }
         }
