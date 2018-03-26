@@ -11,15 +11,13 @@ module.exports = (line_client, event) => {
         let headers = {
             Authorization: "Bearer " + process.env.LINE_ACCESS_TOKEN
         }
-        let url = `https://${process.env.LINE_HOSTNAME}/v2/bot/user/${user_id}/linkToken`;
+        let url = `https://${process.env.LINE_API_HOSTNAME}/v2/bot/user/${user_id}/linkToken`;
 
-        debug(url);
         return request.postAsync({
             url: url,
             headers: headers,
             json: true
         }).then((response) => {
-            debug(response.body);
             if (response.statusCode !== 200){
                 return Promise.reject(new Error(response.statusMessage));
             }

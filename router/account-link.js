@@ -4,6 +4,7 @@ const router = require("express").Router();
 const crypto = require("crypto");
 const memory = require("memory-cache");
 const session = require("express-session");
+const user_db = require("../service/user-db.js");
 const session_options = {
     secret: process.env.LINE_CHANNEL_SECRET,
     resave: false,
@@ -22,7 +23,7 @@ router.get("/", (req, res) => {
     req.session.link_token = req.query.link_token;
 
     // Redirect to CP authentication to get user id in CP.
-    let redirect_url = ``;
+    let redirect_url = user_db.get_auth_url();
     res.redirect(redirect_url);
 });
 
@@ -42,15 +43,14 @@ router.get("/callback", (res, req) => {
     // Create nonce.
     let nonce = _random();
 
-    // Save cp user id, line user id and link token to some database.
+    // Save cp user id to database.
     // In this case, we use memory-cache as database and set 5 min as lifetime.
     memory.put(nonce, {
-        cp_user_id: cp_user_id,
-        link_token: req.session.link_token
+        cp_user_id: cp_user_id
     }, 300 * 1000);
 
     // Redirect to LINE server.
-    let redirect_url = `https://${process.env.LINE_HOSTNAME}/v2/bot/accountLink?nonce=${nonce}&linkToken=${link_token}`;
+    let redirect_url = `https://${process.env.LINE_DIALOG_HOSTNAME}/dialog/bot/account/link?nonce=${nonce}&link_token=${link_token}`;
     res.redirect(redirect_url);
 })
 
