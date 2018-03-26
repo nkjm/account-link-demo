@@ -39,7 +39,7 @@ router.get("/callback", (res, req) => {
         res.sendStatus(400);
     }
     if (!req.query.code){
-        debug(`Required parameter cp_user_id not set.`);
+        debug(`Required parameter code not set.`);
         res.sendStatus(400);
     }
     if (!req.query.state){

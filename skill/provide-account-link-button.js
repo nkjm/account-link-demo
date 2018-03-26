@@ -18,7 +18,7 @@ module.exports = (line_client, event) => {
                 type: "buttons",
                 text: "TodoistとLINEを連携するには下記ボタンをタップして認証を開始してください。",
                 actions: [
-                    {type:"uri", label:"連携", uri:`https://${process.env.CP_HOSTNAME}/account-link?link_token=${link_token}`},
+                    {type:"uri", label:"連携", uri:`https://${process.env.EXT_HOSTNAME}/account-link?link_token=${link_token}`},
                     {type:"uri", label:"test", uri:`https://${process.env.LINE_DIALOG_HOSTNAME}/dialog/bot/accountLink?nonce=${nonce}&linkToken=${link_token}`}
                 ]
             }
