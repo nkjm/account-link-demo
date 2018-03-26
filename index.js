@@ -24,7 +24,7 @@ server.listen(process.env.PORT || 5001, () => {
 server.post("/webhook", line_middleware, (req, res) => {
     res.sendStatus(200);
 
-    forEach(req.body.events, (event) => {
+    req.body.events.forEach((event) => {
         if (event.type === "follow"){
             skill_provide_account_link_button(line_client, event);
         } else if (event.type === "accountLink"){

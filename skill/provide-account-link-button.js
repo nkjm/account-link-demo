@@ -13,11 +13,13 @@ module.exports = (line_client, event) => {
         }
         let url = `https://${process.env.LINE_HOSTNAME}/v2/bot/user/${user_id}/linkToken`;
 
+        debug(url);
         return request.getAsync({
             url: url,
             headers: headers,
             json: true
         }).then((response) => {
+            debug(response.body);
             if (response.statusCode !== 200){
                 return Promise.reject(new Error(response.statusMessage));
             }
