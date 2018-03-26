@@ -13,7 +13,7 @@ module.exports = (line_client, event) => {
         user_id: cp_user_id,
         line_user_id: line_user_id
     }).then((response) => {
-        return line_client.replyMessage({
+        return line_client.replyMessage(event.replyToken, {
             type: "text",
             text: "アカウントがリンクされました"
         })

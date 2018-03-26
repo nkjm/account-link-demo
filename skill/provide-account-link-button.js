@@ -40,6 +40,6 @@ module.exports = (line_client, event) => {
                 ]
             }
         }
-        return line_client.reply(message);
+        return line_client.replyMessage(event.replyToken, message);
     })
 }
