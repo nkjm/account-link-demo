@@ -55,7 +55,7 @@ router.get("/callback", (req, res) => {
         // Create nonce.
         let nonce = _random();
 
-        let ext_acess_token = response.access_token;
+        let ext_access_token = response.access_token;
 
         // Save access_token to database.
         // In this case, we use memory-cache as database and set 5 min as lifetime.
