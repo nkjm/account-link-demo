@@ -22,5 +22,5 @@ module.exports = (line_client, event) => {
     },{
         type: "text",
         text: `リンク完了です。ここでnonce: ${event.link.nonce} をキーにして保存してあったCPのUser Id: ${memory.get(event.link.nonce).cp_user_id} を取り出し、LINEのUser Id: ${event.source.userId} と紐づけてデータベースに保存します。`
-    })
+    }])
 }
