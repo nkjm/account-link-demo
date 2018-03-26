@@ -5,6 +5,10 @@ const memory = require("memory-cache");
 const user_db = require("../service/user-db");
 
 module.exports = (line_client, event) => {
+    debug(`Got accountLink event.`);
+    debug(event);
+
+    /*
     // Retrieve cp user id.
     let cp_user_id = memory.get(event.accountLink.nonce).cp_user_id;
 
@@ -18,4 +22,5 @@ module.exports = (line_client, event) => {
             text: "アカウントがリンクされました"
         })
     })
+    */
 }
