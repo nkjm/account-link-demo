@@ -29,6 +29,10 @@ server.post("/webhook", line_middleware, (req, res) => {
             skill_provide_account_link_button(line_client, event);
         } else if (event.type === "accountLink"){
             skill_account_link(line_client, event);
+        } else if (event.type === "message"){ // for test purpose
+            if (event.message.type === "text" && event.message.text === "link"){
+                skill_provide_account_link_button(line_client, event);
+            }
         }
     })
 })
