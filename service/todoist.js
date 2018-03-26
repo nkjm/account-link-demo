@@ -18,7 +18,8 @@ module.exports = class ServiceTodoist {
         let body = {
             client_id: encodeURIComponent(process.env.TODO_CLIENT_ID),
             client_secret: encodeURIComponent(process.env.TODO_CLIENT_SECRET),
-            redirect_uri: encodeURIComponent(process.env.TODO_REDIRECT_URI)
+            redirect_uri: encodeURIComponent(process.env.TODO_REDIRECT_URI),
+            code: code
         }
 
         return request.postAsync({
