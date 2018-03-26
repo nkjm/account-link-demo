@@ -32,6 +32,28 @@ module.exports = class ServiceTodoist {
         })
     }
 
+    static add_task(token, task){
+        let url = `https://todoist.com/oauth/access_token`;
+        let body = {
+            token: token,
+            commands: [{
+                type: "item_add",
+                args: {
+                    content: task
+                }
+            }]
+        }
+
+        return request.postAsync({
+            url: url,
+            body: body,
+            json: true
+        }).then((response) => {
+            debug(response.body);
+            return response.body;
+        })
+    }
+
     /**
     Method to generate random string.
     @method
