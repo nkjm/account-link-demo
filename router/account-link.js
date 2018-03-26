@@ -33,7 +33,7 @@ router.get("/", (req, res) => {
     res.redirect(redirect_url);
 });
 
-router.get("/callback", (res, req) => {
+router.get("/callback", (req, res) => {
     if (!req.session.link_token){
         debug(`Required session parameter link_token not set.`);
         res.sendStatus(400);
