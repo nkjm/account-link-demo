@@ -17,7 +17,7 @@ module.exports = (line_client, event) => {
                 text: "下記ボタンからXXXのアカウント連携をおこなってください",
                 actions: [
                     {type:"uri", label:"連携", uri:`https://${process.env.CP_HOSTNAME}/account-link?link_token=${link_token}`},
-                    {type:"uri", label:"test", uri:`https://${process.env.LINE_DIALOG_HOSTNAME}/dialog/bot/accountLink?nonce=123456789&linkToken=${link_token}`}
+                    {type:"uri", label:"test", uri:`https://${process.env.LINE_DIALOG_HOSTNAME}/dialog/bot/accountLink?nonce=abcdefg123456789&linkToken=${link_token}`}
                 ]
             }
         }

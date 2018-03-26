@@ -52,7 +52,7 @@ router.get("/callback", (res, req) => {
     }, 300 * 1000);
 
     // Redirect to LINE server.
-    let redirect_url = `https://${process.env.LINE_DIALOG_HOSTNAME}/dialog/bot/accountlink?nonce=${nonce}&linkToken=${link_token}`;
+    let redirect_url = `https://${process.env.LINE_DIALOG_HOSTNAME}/dialog/bot/accountLink?nonce=${nonce}&linkToken=${link_token}`;
     res.redirect(redirect_url);
 })
 
