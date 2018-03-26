@@ -5,7 +5,8 @@ const crypto = require("crypto");
 const debug = require("debug")("router");
 const memory = require("memory-cache");
 const session = require("express-session");
-const user_db = require("../service/user-db.js");
+const secure_compare = require("secure-compare");
+const ext_service = require("../service/todoist.js");
 const session_options = {
     secret: process.env.LINE_CHANNEL_SECRET,
     resave: false,
@@ -23,8 +24,11 @@ router.get("/", (req, res) => {
     // Save link token to session.
     req.session.link_token = req.query.link_token;
 
-    // Redirect to CP authentication to get user id in CP.
-    let redirect_url = user_db.get_auth_url();
+    // Redirect to authentication URL to get external User Id/Token.
+    let state = _random();
+    req.session.state = state;
+
+    let redirect_url = ext_service.get_auth_url(state);
     debug(redirect_url);
     res.redirect(redirect_url);
 });
@@ -34,26 +38,35 @@ router.get("/callback", (res, req) => {
         debug(`Required session parameter link_token not set.`);
         res.sendStatus(400);
     }
-    if (!req.query.cp_user_id){
+    if (!req.query.code){
         debug(`Required parameter cp_user_id not set.`);
         res.sendStatus(400);
     }
+    if (!req.query.state){
+        debug(`Required parameter state not set.`);
+        res.sendStatus(400);
+    }
+    if (!secure_compare(req.query.state, req.session.state)){
+        debug(`state does not match.`);
+        res.sendStatus(400);
+    }
 
-    // Retrieve user id.
-    let cp_user_id = req.query.cp_user_id; //TBD
+    ext_service.get_token(req.query.code).then((response) => {
+        // Create nonce.
+        let nonce = _random();
 
-    // Create nonce.
-    let nonce = _random();
+        let ext_acess_token = response.access_token;
 
-    // Save cp user id to database.
-    // In this case, we use memory-cache as database and set 5 min as lifetime.
-    memory.put(nonce, {
-        cp_user_id: cp_user_id
-    }, 300 * 1000);
+        // Save access_token to database.
+        // In this case, we use memory-cache as database and set 5 min as lifetime.
+        memory.put(nonce, {
+            ext_access_token: ext_access_token
+        }, 300 * 1000);
 
-    // Redirect to LINE server.
-    let redirect_url = `https://${process.env.LINE_DIALOG_HOSTNAME}/dialog/bot/accountLink?nonce=${nonce}&linkToken=${link_token}`;
-    res.redirect(redirect_url);
+        // Redirect to LINE server.
+        let redirect_url = `https://${process.env.LINE_DIALOG_HOSTNAME}/dialog/bot/accountLink?nonce=${nonce}&linkToken=${req.session.link_token}`;
+        res.redirect(redirect_url);
+    })
 })
 
 /**

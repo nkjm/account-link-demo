@@ -15,12 +15,19 @@ module.exports = (line_client, event) => {
         });
     }
 
+    // Update user db.
+    let user_db = memory.get("user_db");
+    if (!user_db) user_db = {};
+    user_db[event.source.userId] = memory.get(event.link.nonce).ext_access_token;
+    debug(user_db);
+    memory.put("user_db", user_db);
+
     return line_client.replyMessage(event.replyToken, [{
         type: "sticker",
         packageId: "2",
         stickerId: "144"
     },{
         type: "text",
-        text: `リンク完了です。ここでnonce: ${event.link.nonce} をキーにして保存してあったCPのUser Id: ${memory.get(event.link.nonce).cp_user_id} を取り出し、LINEのUser Id: ${event.source.userId} と紐づけてデータベースに保存します。`
+        text: `リンク完了です。`
     }])
 }

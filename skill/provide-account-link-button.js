@@ -11,20 +11,12 @@ Promise.promisifyAll(request);
 module.exports = (line_client, event) => {
     // Get link link_token
     return get_link_token(event.source.userId).then((link_token) => {
-
-        // Save cp user id to database.
-        // In this case, we use memory-cache as database and set 5 min as lifetime.
-        let nonce = _random();
-        memory.put(nonce, {
-            cp_user_id: "TEST_CP_USER_ID"
-        }, 300 * 1000);
-
         let message = {
             type: "template",
-            altText: "下記ボタンからXXXのアカウント連携をおこなってください",
+            altText: "TodoistとLINEを連携するには下記ボタンをタップして認証を開始してください。",
             template: {
                 type: "buttons",
-                text: "下記ボタンからXXXのアカウント連携をおこなってください",
+                text: "TodoistとLINEを連携するには下記ボタンをタップして認証を開始してください。",
                 actions: [
                     {type:"uri", label:"連携", uri:`https://${process.env.CP_HOSTNAME}/account-link?link_token=${link_token}`},
                     {type:"uri", label:"test", uri:`https://${process.env.LINE_DIALOG_HOSTNAME}/dialog/bot/accountLink?nonce=${nonce}&linkToken=${link_token}`}
