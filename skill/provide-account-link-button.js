@@ -14,7 +14,7 @@ module.exports = (line_client, event) => {
         let url = `https://${process.env.LINE_HOSTNAME}/v2/bot/user/${user_id}/linkToken`;
 
         debug(url);
-        return request.getAsync({
+        return request.postAsync({
             url: url,
             headers: headers,
             json: true
