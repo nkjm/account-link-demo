@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const debug = require("debug")("skill");
 const crypto = require("crypto");
+const memory = require("memory-cache");
 const request = require("request");
 Promise.promisifyAll(request);
 
