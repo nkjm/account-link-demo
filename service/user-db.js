@@ -1,6 +1,7 @@
 "use strict";
 
 const jsforce = require('jsforce');
+const debug = require("debug")("service");
 
 module.exports = class ServiceUserDb {
     static get_auth_url(){

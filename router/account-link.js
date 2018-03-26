@@ -2,6 +2,7 @@
 
 const router = require("express").Router();
 const crypto = require("crypto");
+const debug = require("debug")("router");
 const memory = require("memory-cache");
 const session = require("express-session");
 const user_db = require("../service/user-db.js");
@@ -24,6 +25,7 @@ router.get("/", (req, res) => {
 
     // Redirect to CP authentication to get user id in CP.
     let redirect_url = user_db.get_auth_url();
+    debug(redirect_url);
     res.redirect(redirect_url);
 });
 
