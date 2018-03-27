@@ -1,7 +1,5 @@
 "use strict";
 
-require("dotenv").config();
-
 const debug = require("debug")("skill");
 const crypto = require("crypto");
 const memory = require("memory-cache");
@@ -9,7 +7,7 @@ const request = require("request");
 Promise.promisifyAll(request);
 
 module.exports = (line_client, event) => {
-    // Get link link_token
+    // Get link token and provide link button to user.
     return get_link_token(event.source.userId).then((link_token) => {
         let message = {
             type: "template",
@@ -25,6 +23,11 @@ module.exports = (line_client, event) => {
         return line_client.replyMessage(event.replyToken, message);
     })
 
+    /**
+    Method to issue link token from LINE server
+    @param {String} user_id LINE user id
+    @return {String} link token
+    */
     function get_link_token(user_id){
         let headers = {
             Authorization: "Bearer " + process.env.LINE_ACCESS_TOKEN

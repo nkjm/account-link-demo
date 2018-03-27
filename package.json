@@ -17,7 +17,6 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
-    "jsforce": "^1.8.1",
     "memory-cache": "^0.2.0",
     "request": "^2.85.0",
     "secure-compare": "^3.0.1"

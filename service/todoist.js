@@ -32,6 +32,10 @@ module.exports = class ServiceTodoist {
         })
     }
 
+    static revoke_token(token){
+
+    }
+
     static add_task(token, task){
         let url = `https://todoist.com/oauth/access_token`;
         let body = {
