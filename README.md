@@ -2,8 +2,10 @@
 
 This is a sample LINE bot which implements account link to link LINE with Todoist.
 
-# 1 click deploy
+# Getting started
 
-You can deploy to heroku environment right away.
+- Create a new channel of LINE Messaging API in [LINE developer console](https://developers.line.me/console/)
+- Create a new app in [Todoist App Management](https://developer.todoist.com/appconsole.html)
+- Deploy bot instance to heroku.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
