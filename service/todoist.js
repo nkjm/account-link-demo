@@ -6,7 +6,7 @@ Promise.promisifyAll(request);
 
 module.exports = class ServiceTodoist {
     static get_auth_url(state){
-        let client_id = encodeURIComponent(process.env.TODO_CLIENT_ID);
+        let client_id = encodeURIComponent(process.env.TODOIST_CLIENT_ID);
         let scope = encodeURIComponent("task:add");
         let url = `https://todoist.com/oauth/authorize?client_id=${client_id}&scope=${scope}&state=${state}`;
 
@@ -16,9 +16,9 @@ module.exports = class ServiceTodoist {
     static get_token(code){
         let url = `https://todoist.com/oauth/access_token`;
         let body = {
-            client_id: encodeURIComponent(process.env.TODO_CLIENT_ID),
-            client_secret: encodeURIComponent(process.env.TODO_CLIENT_SECRET),
-            redirect_uri: encodeURIComponent(process.env.TODO_REDIRECT_URI),
+            client_id: encodeURIComponent(process.env.TODOIST_CLIENT_ID),
+            client_secret: encodeURIComponent(process.env.TODOIST_CLIENT_SECRET),
+            redirect_uri: encodeURIComponent(process.env.TODOIST_REDIRECT_URI),
             code: code
         }
 

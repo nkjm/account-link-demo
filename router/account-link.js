@@ -65,7 +65,8 @@ router.get("/callback", (req, res) => {
         }, 300 * 1000);
 
         // Redirect to LINE server to ensure the LINE user id is not spoofed.
-        let redirect_url = `https://${process.env.LINE_DIALOG_HOSTNAME}/dialog/bot/accountLink?nonce=${nonce}&linkToken=${req.session.link_token}`;
+        let line_dialog_hostname = process.env.LINE_DIALOG_HOSTNAME || "access.line.me";
+        let redirect_url = `https://${line_dialog_hostname}/dialog/bot/accountLink?nonce=${nonce}&linkToken=${req.session.link_token}`;
         res.redirect(redirect_url);
     })
 })

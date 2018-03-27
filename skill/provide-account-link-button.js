@@ -32,7 +32,8 @@ module.exports = (line_client, event) => {
         let headers = {
             Authorization: "Bearer " + process.env.LINE_ACCESS_TOKEN
         }
-        let url = `https://${process.env.LINE_API_HOSTNAME}/v2/bot/user/${user_id}/linkToken`;
+        let line_api_hostname = process.env.LINE_API_HOSTNAME || "api.line.me";
+        let url = `https://${line_api_hostname}/v2/bot/user/${user_id}/linkToken`;
 
         return request.postAsync({
             url: url,
