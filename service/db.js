@@ -11,7 +11,7 @@ module.exports = class ServiceDb {
         return cache.put(key, value, lifetime);
     }
 
-    static remove_linkage(line_user_id){
-
+    static del(key){
+        return cache.del(key);
     }
 }
