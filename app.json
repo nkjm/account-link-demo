@@ -27,7 +27,7 @@
       "DEBUG": {
           "description": "Flag to switch debugging level and target scripts.",
           "required": false,
-          "value": "bot-express:*"
+          "value": "*"
 
       }
   },

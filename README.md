@@ -6,10 +6,10 @@ This is a sample LINE bot which implements account link to link LINE with Todois
 
 Account link is the LINE API and the best practice to securely link LINE account with another services.
 
-1. Request issuing link token for LINE server.
-1. Redirect user authentication URL of the external service to retrieve the credential.
+1. Request link token for LINE server.
+1. Redirect user to authentication URL of the external service to retrieve the credential.
 1. Generate nonce and saving credential using nonce as key.
-1. Redirect user to LINE server to verify the user is not spoofed.
+1. Redirect user to LINE server with link token and nonce to verify the user is not spoofed.
 1. LINE notify the verification result by sending accountLink event to the webhook of Messaging API.
 
 # Demo
