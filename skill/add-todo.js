@@ -6,7 +6,7 @@ const db = require("../service/db");
 
 module.exports = (line_client, event) => {
     let linkage = db.get(`linkage_${event.source.userId}`);
-    if (!linkage.access_token){
+    if (!linkage || !linkage.access_token){
         return line_client.replyMessage(event.replyToken, {
             type: "text",
             text: "まだtodoistと連携されていないようです。"
