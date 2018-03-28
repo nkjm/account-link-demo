@@ -1,7 +1,7 @@
 {
   "name": "LINE account link demo",
   "description": "A sample bot which implements account link to link LINE with Todoist.",
-  "repository": "https://git.linecorp.com/kazuki-nakajima/account-link-demo",
+  "repository": "https://github.com/nkjm/account-link-demo",
   "logo": "https://raw.githubusercontent.com/nkjm/account-link-demo/master/image/logo.png",
   "env": {
       "LINE_CHANNEL_SECRET": {
