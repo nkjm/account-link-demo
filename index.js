@@ -39,7 +39,7 @@ server.post("/webhook", line_middleware, (req, res) => {
                 if (event.message.text.toLowerCase() === "link"){
                     // for test purpose
                     skill_provide_account_link_button(line_client, event);
-                } else if (event.message.text.match(/^todo:/)){
+                } else if (event.message.text.match(/^todo /i)){
                     skill_add_todo(line_client, event);
                 }
             }

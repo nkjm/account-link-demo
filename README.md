@@ -18,6 +18,6 @@ This is a sample LINE bot which implements account link to link LINE with Todois
 
 1. Link with your todoist account.
 
-1. Say "todo: Buy milk".
+1. Say "todo Buy milk".
 
 1. Open todoist and checkout if "Buy milk" task has been added to Inbox.
