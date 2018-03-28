@@ -2,10 +2,10 @@
 
 const debug = require("debug")("skill");
 const todoist = require("../service/todoist");
-const memory = require("memory-cache");
+const db = require("../service/db");
 
 module.exports = (line_client, event) => {
-    let access_token = memory.get(event.source.userId).access_token;
+    let access_token = db.get(`linkage_${event.source.userId}`).access_token;
 
     if (!access_token){
         return line_client.replyMessage(event.replyToken, {

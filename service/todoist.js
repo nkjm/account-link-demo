@@ -33,11 +33,24 @@ module.exports = class ServiceTodoist {
     }
 
     static revoke_token(token){
+        let url = "https://todoist.com/api/access_tokens/revoke";
+        let body = {
+            client_id: encodeURIComponent(process.env.TODOIST_CLIENT_ID),
+            client_secret: encodeURIComponent(process.env.TODOIST_CLIENT_SECRET),
+            access_token: token
+        }
 
+        return request.postAsync({
+            url: url,
+            body: body,
+            json: true
+        }).then((response) => {
+            debug(response.body);
+            return response.body;
+        })
     }
 
     static add_task(token, task){
-        debug(`token: ${token}, task: ${task}`)
         let url = `https://beta.todoist.com/API/v8/tasks`;
         let headers = {
             Authorization: `Bearer ${token}`

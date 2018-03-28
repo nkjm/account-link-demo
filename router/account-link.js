@@ -3,7 +3,7 @@
 const router = require("express").Router();
 const crypto = require("crypto");
 const debug = require("debug")("router");
-const memory = require("memory-cache");
+const db = require("../service/db");
 const session = require("express-session");
 const secure_compare = require("secure-compare");
 const ext_service = require("../service/todoist.js");
@@ -59,8 +59,7 @@ router.get("/callback", (req, res) => {
         let nonce = _random();
 
         // Save access_token to database.
-        // In this case, we use memory-cache as database and set 5 min as lifetime.
-        memory.put(nonce, {
+        db.put(`nonce_${nonce}`, {
             ext_access_token: response.access_token
         }, 300 * 1000);
 

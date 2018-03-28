@@ -1,7 +1,7 @@
 "use strict";
 
 const debug = require("debug")("skill");
-const memory = require("memory-cache");
+const db = require("../service/db");
 
 module.exports = (line_client, event) => {
     if (event.link.result !== "ok"){
@@ -19,13 +19,13 @@ module.exports = (line_client, event) => {
     }
 
     // Retrieve access token of external service.
-    let ext_access_token = memory.get(event.link.nonce).ext_access_token;
+    let ext_access_token = db.get(`nonce_${event.link.nonce}`).ext_access_token;
     if (!ext_access_token){
         throw new Error("ext_access_token not found.");
     }
 
     // Save the linkage of creadential of the external service and LINE user id.
-    save_linkage(event.source.userId, {
+    db.put(`linkage_${event.source.userId}`, {
         access_token: ext_access_token
     })
 
@@ -36,10 +36,6 @@ module.exports = (line_client, event) => {
         stickerId: "144"
     },{
         type: "text",
-        text: `リンク完了です。`
+        text: `リンク完了です。このアカウントをブロックするとリンクも自動的に解除されます。`
     }])
-
-    function save_linkage(line_user_id, ext_credential){
-        memory.put(line_user_id, ext_credential);
-    }
 }
