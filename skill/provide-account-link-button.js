@@ -8,7 +8,7 @@ Promise.promisifyAll(request);
 module.exports = (line_client, event) => {
     // Get link token and provide link button to user.
     return get_link_token(event.source.userId).then((link_token) => {
-        let ext_hostname = process.env.EXT_HOSTNAME || `${process.env.HEROKU_APP_NAME}.herokuapp.com`;
+        let ext_hostname = process.env.EXT_HOSTNAME;
         let message = {
             type: "template",
             altText: "TodoistとLINEを連携するには下記ボタンをタップして認証を開始してください。",
@@ -16,7 +16,7 @@ module.exports = (line_client, event) => {
                 type: "buttons",
                 text: "TodoistとLINEを連携するには下記ボタンをタップして認証を開始してください。",
                 actions: [
-                    {type:"uri", label:"連携", uri:`https://${process.env.EXT_HOSTNAME}/account-link?link_token=${link_token}`}
+                    {type:"uri", label:"連携", uri:`https://${ext_hostname}/account-link?link_token=${link_token}`}
                 ]
             }
         }
