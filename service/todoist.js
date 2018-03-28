@@ -1,6 +1,6 @@
 "use strict";
 
-const debug = require("debug")("service");
+const debug = require("debug")("todoist-bot:service");
 const request = require("request");
 Promise.promisifyAll(request);
 

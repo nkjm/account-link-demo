@@ -1,6 +1,6 @@
 "use strict";
 
-const debug = require("debug")("skill");
+const debug = require("debug")("todoist-bot:skill");
 const db = require("../service/db");
 const ext_service = require("../service/todoist");
 

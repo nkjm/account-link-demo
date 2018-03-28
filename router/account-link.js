@@ -2,7 +2,7 @@
 
 const router = require("express").Router();
 const crypto = require("crypto");
-const debug = require("debug")("router");
+const debug = require("debug")("todoist-bot:router");
 const db = require("../service/db");
 const session = require("express-session");
 const secure_compare = require("secure-compare");

@@ -1,6 +1,6 @@
 "use strict";
 
-const debug = require("debug")("skill");
+const debug = require("debug")("todoist-bot:skill");
 const crypto = require("crypto");
 const request = require("request");
 Promise.promisifyAll(request);

@@ -1,5 +1,6 @@
 "use strict";
 
+const debug = require("debug")("todoist-bot:service");
 const cache = require("memory-cache");
 
 module.exports = class ServiceDb {
