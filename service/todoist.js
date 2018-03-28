@@ -7,7 +7,7 @@ Promise.promisifyAll(request);
 module.exports = class ServiceTodoist {
     static get_auth_url(state){
         let client_id = encodeURIComponent(process.env.TODOIST_CLIENT_ID);
-        let scope = encodeURIComponent("task:add");
+        let scope = "data:read_write";
         let url = `https://todoist.com/oauth/authorize?client_id=${client_id}&scope=${scope}&state=${state}`;
 
         return url;
