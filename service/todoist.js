@@ -48,6 +48,7 @@ module.exports = class ServiceTodoist {
 
         return request.postAsync({
             url: url,
+            headers: headers,
             body: body,
             json: true
         }).then((response) => {
