@@ -11,6 +11,7 @@ Account link is the LINE API and the best practice to securely link LINE account
 1. Generate nonce and saving credential using nonce as key.
 1. Redirect user to LINE server with link token and nonce to verify the user is not spoofed.
 1. LINE notify the verification result by sending accountLink event to the webhook of Messaging API.
+1. Bot can save the linkage of LINE and external service to arbitrary database.
 
 # Demo
 
