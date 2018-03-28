@@ -5,9 +5,8 @@ const todoist = require("../service/todoist");
 const db = require("../service/db");
 
 module.exports = (line_client, event) => {
-    let access_token = db.get(`linkage_${event.source.userId}`).access_token;
-
-    if (!access_token){
+    let linkage = db.get(`linkage_${event.source.userId}`);
+    if (!linkage.access_token){
         return line_client.replyMessage(event.replyToken, {
             type: "text",
             text: "まだtodoistと連携されていないようです。"
@@ -15,7 +14,7 @@ module.exports = (line_client, event) => {
     }
 
     let task = event.message.text.replace(/todo /i, "").trim();
-    return todoist.add_task(access_token, task).then((response) => {
+    return todoist.add_task(linkage.access_token, task).then((response) => {
         return line_client.replyMessage(event.replyToken, {
             type: "text",
             text: "タスクを追加しました。"
