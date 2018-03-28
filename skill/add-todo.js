@@ -14,7 +14,7 @@ module.exports = (line_client, event) => {
         })
     }
 
-    let task = event.message.text.replace("todo ", "").trim();
+    let task = event.message.text.replace(/todo /i, "").trim();
     return todoist.add_task(access_token, task).then((response) => {
         return line_client.replyMessage(event.replyToken, {
             type: "text",
