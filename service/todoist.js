@@ -37,15 +37,13 @@ module.exports = class ServiceTodoist {
     }
 
     static add_task(token, task){
-        let url = `https://todoist.com/oauth/access_token`;
+        debug(`token: ${token}, task: ${task}`)
+        let url = `https://beta.todoist.com/API/v8/tasks`;
+        let headers = {
+            Authorization: `Bearer ${token}`
+        }
         let body = {
-            token: token,
-            commands: [{
-                type: "item_add",
-                args: {
-                    content: task
-                }
-            }]
+            content: task
         }
 
         return request.postAsync({
