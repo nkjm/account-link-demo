@@ -14,6 +14,7 @@ const line_client = new line.Client(line_options);
 const line_middleware = line.middleware(line_options);
 const skill_provide_account_link_button = require("./skill/provide-account-link-button");
 const skill_account_link = require("./skill/account-link");
+const skill_account_unlink = require("./skill/account-unlink");
 const skill_add_todo = require("./skill/add-todo");
 
 // Launch server.
